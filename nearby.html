@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Nearby Doctors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 300px;
+        }
+        #doctorList {
+            margin-top: 20px;
+        }
+        .doctor {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Contact Nearby Doctors</h1>
+    <form id="diseaseForm">
+        <label for="disease">Enter Your Disease:</label>
+        <input type="text" id="disease" name="disease" required>
+        
+        <label for="location">Use Current Location:</label>
+        <input type="checkbox" id="locationCheckbox" name="location">
+        
+        <button type="submit">Find Nearby Doctors</button>
+    </form>
+    <div id="doctorList"></div>
+
+    <script>
+        document.getElementById("diseaseForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const disease = document.getElementById("disease").value;
+            const useLocation = document.getElementById("locationCheckbox").checked;
+
+            let userLocation;
+            if (useLocation) {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition((position) => {
+                        userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        findNearbyDoctors(disease, userLocation);
+                    }, () => {
+                        alert("Unable to retrieve your location. Please enter it manually.");
+                    });
+                } else {
+                    alert("Geolocation is not supported by this browser.");
+                }
+            } else {
+                alert("Please enter your location manually if not using current location.");
+            }
+        });
+
+        function findNearbyDoctors(disease, location) {
+            // Mock API URL
+            const apiUrl = `https://api.example.com/doctors?disease=${encodeURIComponent(disease)}&lat=${location.lat}&lng=${location.lng}`;
+
+            // Mock fetch call, replace with a real API call
+            fetch(apiUrl)
+                .then(response => {
+                    // Simulating a successful response
+                    return Promise.resolve({
+                        json: () => Promise.resolve([
+                            {
+                                name: "Dr. John Smith",
+                                specialty: "Oncologist",
+                                address: "123 Health St, City, Country",
+                                phone: "+1234567890",
+                                email: "drjohn@example.com"
+                            },
+                            {
+                                name: "Dr. Jane Doe",
+                                specialty: "General Practitioner",
+                                address: "456 Care Ave, City, Country",
+                                phone: "+0987654321",
+                                email: "drjane@example.com"
+                            }
+                        ])
+                    });
+                })
+                .then(data => data.json())
+                .then(doctors => {
+                    displayDoctors(doctors);
+                })
+                .catch(error => console.error('Error fetching doctor data:', error));
+        }
+
+        function displayDoctors(doctors) {
+            const doctorList = document.getElementById("doctorList");
+            doctorList.innerHTML = ""; // Clear previous results
+
+            if (doctors.length === 0) {
+                doctorList.innerHTML = "No doctors found.";
+                return;
+            }
+
+            doctors.forEach(doctor => {
+                const doctorItem = document.createElement("div");
+                doctorItem.className = "doctor";
+                doctorItem.innerHTML = `
+                    <h3>${doctor.name}</h3>
+                    <p><strong>Specialty:</strong> ${doctor.specialty}</p>
+                    <p><strong>Address:</strong> ${doctor.address}</p>
+                    <p><strong>Contact:</strong> ${doctor.phone}</p>
+                    <a href="mailto:${doctor.email}">Email Doctor</a>
+                `;
+                doctorList.appendChild(doctorItem);
+            });
+        }
+    </script>
+</body>
+</html>

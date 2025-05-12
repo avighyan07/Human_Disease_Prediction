@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="jumbotron text-center" style="background-color: black"  >
+    <h1>Welcome to the Medical Website</h1>
+    <p class="lead">Your one-stop solution for medical predictions and analysis.</p>
+  </div>
+
+  <div class="row text-center" >
+    <div class="col-md-4">
+      <div class="card" style="background-color: black">
+        <div class="card-body">
+          <h5 class="card-title">ML Model Prediction</h5>
+          <p class="card-text">
+            Provide input data and get predictions based on our machine learning models.
+          </p>
+          <a href="/mlpred" class="btn btn-primary">Try Now</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="card" style="background-color: black">
+        <div class="card-body">
+          <h5 class="card-title">Image Upload (CNN)</h5>
+          <p class="card-text">
+            Upload medical images and let our CNN model analyze and predict the results.
+          </p>
+          <a href="/dlpred" class="btn btn-primary">Upload Image</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="card" style="background-color: black">
+        <div class="card-body">
+          <h5 class="card-title">Contact Us</h5>
+          <p class="card-text">
+            <p> Connect With Us On  
+            <a href="https://www.instagram.com/avighyan17/" target="_blank">Instagram</a>
+            
+            </p>
+            <p>Connect With Us On    
+            <a href="https://www.facebook.com/" target="_blank">Facebook</a>
+            </p>
+
+        </p>
+        
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Section for Uploading Medical Images -->
+  <div class="row text-center mt-5"  >
+    <div class="col-md-12">
+      <div class="card" >
+        <div class="card-body" style="background-color: black">
+          <h5 class="card-title" >Upload Your Medical Images</h5>
+          <p class="card-text">
+            Upload your medical images to keep a record and analyze them later.
+          </p>
+          <a href="/upload" class="btn btn-primary">Upload Image</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

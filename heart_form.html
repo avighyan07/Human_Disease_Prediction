@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_ml.css') }}">
+</head>
+<body>
+    <h1>Heart Disease Prediction</h1>
+    {% if prediction %}
+    <h2 id="predcol">Prediction: {{ prediction }}</h2>
+    {% endif %}
+    <form action="/heart" method="POST">
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" min="20" max="100" placeholder="20-100" required><br>
+
+        <label for="sex">Sex (0 = female, 1 = male):</label>
+        <input type="number" id="sex" name="sex" min="0" max="1" placeholder="0-1" required><br>
+
+        <label for="cp">Chest Pain Type (cp):</label>
+        <input type="number" id="cp" name="cp" min="0" max="3" placeholder="0-3" required><br>
+
+        <label for="trestbps">Resting Blood Pressure (trestbps):</label>
+        <input type="number" id="trestbps" name="trestbps" min="80" max="200" placeholder="80-200" required><br>
+
+        <label for="chol">Cholesterol (chol):</label>
+        <input type="number" id="chol" name="chol" min="100" max="600" placeholder="100-600" required><br>
+
+        <label for="fbs">Fasting Blood Sugar (fbs, 1 if > 120 mg/dl, 0 otherwise):</label>
+        <input type="number" id="fbs" name="fbs" min="0" max="1" placeholder="0-1" required><br>
+
+        <label for="restecg">Resting Electrocardiographic Results (restecg):</label>
+        <input type="number" id="restecg" name="restecg" min="0" max="2" placeholder="0-2" required><br>
+
+        <label for="thalach">Maximum Heart Rate Achieved (thalach):</label>
+        <input type="number" id="thalach" name="thalach" min="70" max="210" placeholder="70-210" required><br>
+
+        <label for="exang">Exercise Induced Angina (exang, 1 = yes, 0 = no):</label>
+        <input type="number" id="exang" name="exang" min="0" max="1" placeholder="0-1" required><br>
+
+        <label for="oldpeak">ST Depression Induced by Exercise (oldpeak):</label>
+        <input type="number" step="0.1" id="oldpeak" name="oldpeak" min="0" max="6.2" placeholder="0-6.2" required><br>
+
+        <label for="slope">Slope of the Peak Exercise ST Segment (slope):</label>
+        <input type="number" id="slope" name="slope" min="0" max="2" placeholder="0-2" required><br>
+
+        <label for="ca">Number of Major Vessels Colored by Fluoroscopy (ca):</label>
+        <input type="number" id="ca" name="ca" min="0" max="4" placeholder="0-4" required>
+        <label for="thal">Thalassemia (thal, 0 = normal, 1 = fixed defect, 2 = reversible defect):</label>
+        <input type="number" id="thal" name="thal" min="0" max="2" placeholder="0-2" required><br>
+
+        <input type="submit" value="Predict">
+    </form>
+</body>
+</html>
+    

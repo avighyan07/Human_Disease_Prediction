@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_ml.css') }}">
+</head>
+<body>
+    <h1>Diabetes Prediction</h1>
+    {% if prediction %}
+    <h2 id="predcol">Prediction: {{ prediction }}</h2>
+    {% endif %}
+    <form action="/diabetes" method="POST">
+        <label for="Pregnancies">Pregnancies (0-20):</label>
+        <input type="number" id="Pregnancies" name="Pregnancies" min="0" max="20" required placeholder="0-20"><br>
+
+        <label for="Glucose">Glucose (0-200 mg/dL):</label>
+        <input type="number" id="Glucose" name="Glucose" min="0" max="200" required placeholder="0-200"><br>
+
+        <label for="BloodPressure">Blood Pressure (0-122 mmHg):</label>
+        <input type="number" id="BloodPressure" name="BloodPressure" min="0" max="122" required placeholder="0-122"><br>
+
+        <label for="SkinThickness">Skin Thickness (0-99 mm):</label>
+        <input type="number" id="SkinThickness" name="SkinThickness" min="0" max="99" required placeholder="0-99"><br>
+
+        <label for="Insulin">Insulin (0-846 μU/mL):</label>
+        <input type="number" id="Insulin" name="Insulin" min="0" max="846" required placeholder="0-846"><br>
+
+        <label for="BMI">BMI (0-67):</label>
+        <input type="number" id="BMI" name="BMI" min="0" max="67" required placeholder="0-67"><br>
+
+        <label for="DiabetesPedigreeFunction">Diabetes Pedigree Function (0.0-2.5):</label>
+        <input type="number" step="0.01" id="DiabetesPedigreeFunction" name="DiabetesPedigreeFunction" min="0.0" max="2.5" required placeholder="0.0-2.5"><br>
+
+        <label for="Age">Age (0-120):</label>
+        <input type="number" id="Age" name="Age" min="0" max="120" required placeholder="0-120"><br>
+
+        <input type="submit" value="Predict">
+    </form>
+</body>
+</html>
